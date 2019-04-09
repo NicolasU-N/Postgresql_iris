@@ -1,0 +1,37 @@
+--CREATE ROLE iris WITH LOGIN ENCRYPTED PASSWORD 'iris';
+
+/*CREATE DATABASE iris
+WITH OWNER = iris
+ENCODING = 'UTF8'
+TABLESPACE = pg_default
+LC_COLLATE = 'es_CO.UTF-8'
+LC_CTYPE = 'es_CO.UTF-8'
+CONNECTION LIMIT = -1;*/
+
+--Create a table Conectar primero a base d edatos iris 
+
+CREATE TABLE public.iris
+(
+id bigserial NOT NULL,
+sepal_length double precision,
+sepal_width double precision,
+petal_length double precision,
+petal_width double precision,
+category character varying(100),
+CONSTRAINT iris_pkey PRIMARY KEY (id)
+)
+WITH (
+OIDS=FALSE
+);
+ALTER TABLE public.iris
+OWNER TO iris;
+
+
+-- Copying the iris dataset in the iris database table
+
+COPY iris(sepal_length,sepal_width,petal_length,petal_width,category)
+FROM '/home/nicolas/Documentos/DataScience/yachay-master/datasets/iris.csv' DELIMITER ',';
+
+-- Mirando tabla iris
+
+SELECT * from iris;
